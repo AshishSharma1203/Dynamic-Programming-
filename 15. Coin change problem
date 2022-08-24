@@ -1,0 +1,146 @@
+GFG probelm link solution : https://practice.geeksforgeeks.org/problems/coin-change2448/1
+
+
+//{ Driver Code Starts
+#include <bits/stdc++.h>
+using namespace std;
+
+// } Driver Code Ends
+class Solution {
+  public:
+    long long int count(int coins[], int n, int sum) {
+
+        // code here.
+        
+        // done by top down approach 
+        
+        
+        
+        if(sum==0){
+            return 1;
+        }
+        
+        
+        long long int t[n+1][sum+1];
+        
+        for(int i=0;i<n+1;i++){
+            
+            
+            for(int j=0;j<sum+1;j++)
+            {
+                if(i==0)
+                {
+                 t[i][j]=0;   
+                }
+            }
+            
+        }
+        
+        for(int i=0;i<n+1;i++){
+            
+            for(int j=0;j<sum+1;j++){
+                
+                if(j==0)
+                {
+                    t[i][j]=1;
+                }
+            }
+        }
+        
+        
+        for(int i=1;i<n+1;i++)
+        {
+            for(int j=1;j<sum+1;j++)
+            {
+                
+                
+              if(coins[i-1]<=j){
+                  
+                  
+                  t[i][j]= t[i][j-coins[i-1]]  + t[i-1][j];
+                  
+              }
+              
+              else{
+                  
+                  t[i][j]= t[i-1][j];
+                  
+              }
+                
+            }
+            
+        }
+        
+        return t[n][sum];
+        
+        
+    }
+};
+
+//{ Driver Code Starts.
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int sum, N;
+        cin >> sum >> N;
+        int coins[N];
+        for (int i = 0; i < N; i++) cin >> coins[i];
+        Solution ob;
+        cout << ob.count(coins, N, sum) << endl;
+    }
+
+    return 0;
+}
+
+
+// } Driver Code Ends
+
+
+
+Leetcode problem link : https://leetcode.com/problems/coin-change-2/
+
+done by memoization  
+class Solution {
+public:
+    
+    int solve( int n,int target,vector<vector<int>> &dp , vector<int> &coins )
+    {
+        
+        if(target==0){
+            return 1;
+        }
+        
+        if(n==0){
+            return target==0?1:0;
+        }
+        
+        if(dp[n][target]!=-1){
+            return dp[n][target];
+        }
+        
+        if(coins[n-1]<=target){
+            return dp[n][target]= solve(n,target-coins[n-1],dp,coins) + solve(n-1,target,dp,coins);
+        }
+        
+        else{
+            return dp[n][target]=solve(n-1,target,dp,coins);
+        }
+        
+        return dp[n][target];
+        
+        
+    }    
+    int change(int amount, vector<int>& coins) {
+       
+        // int res=0;
+        int n= coins.size();
+        
+        vector<vector<int>> dp (n+1,vector<int> (amount+1,-1));
+        
+        int ans = solve( n,amount, dp,coins );
+        
+        return ans ;
+        
+    }
+};
