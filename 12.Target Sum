@@ -1,0 +1,91 @@
+GFG problem link --> https://practice.geeksforgeeks.org/problems/target-sum-1626326450/1
+
+--> code is not accepted .. Need some changes ...--> progress is pending . 
+
+//{ Driver Code Starts
+//Initial Template for C++
+
+#include <bits/stdc++.h>
+using namespace std;
+
+
+// } Driver Code Ends
+//Back-end complete function Template for C++
+
+class Solution {
+  public:
+  
+  int subsetsum(vector<int> & arr,int n,int sum,vector<vector<int>> &dp)
+{
+    
+    if(sum==0){
+        return 1;
+    }
+    
+    if(n==0){
+        return sum==0?1:0;
+    }
+    
+    if(dp[n][sum]!=-1){
+        return dp[n][sum];
+    }
+    
+    if(arr[n-1]<=sum){
+        return dp[n][sum]=subsetsum(arr,n-1,sum-arr[n-1],dp) + subsetsum(arr,n-1,sum,dp);
+    }
+    else{
+        return dp[n][sum]=subsetsum(arr,n-1,sum,dp);
+    }
+    
+    return dp[n][sum];
+    
+    
+} 
+
+    int findTargetSumWays(vector<int>&A ,int target) 
+    {
+        //Your code here
+        
+        int arrsum=0;
+        
+        int n=A.size();
+        
+        for(int i=0;i<n;i++){
+            arrsum+=A[i];
+        }
+        int sum=(arrsum+target)/2;
+        
+        vector<vector<int>> dp (n+1,vector<int> (sum+1,-1)) ;
+        
+        int count=subsetsum(A,n,sum,dp);
+        
+        return count;
+        
+        
+    }
+};
+
+//{ Driver Code Starts.
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int N;
+        
+        cin>>N;
+        vector<int>arr(N);
+        
+        for(int i=0 ; i<N ; i++){
+            cin>>arr[i];
+        }
+        int target;
+        cin >> target;
+
+        Solution ob;
+        cout<<ob.findTargetSumWays(arr,target);
+        cout<<"\n";
+    }
+    return 0;
+}
+// } Driver Code Ends
