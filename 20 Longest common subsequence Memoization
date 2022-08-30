@@ -1,0 +1,53 @@
+--> Longest Common Subsequence Continued...
+Memoization Approach -
+
+Video Link  : https://youtu.be/g_hIx4yn9zg
+
+#include<bits/stdc++.h>
+using namespace std;
+
+    
+  
+    int LCS(string s1,string s2,int n,int m, vector<vector<int>> &t)
+    {
+        
+        
+        if(n==0 || m==0)
+        {
+            return 0;
+        }
+        
+        if(t[n][m]!=-1)
+        {
+            return t[n][m];
+        }
+        
+        if(s1[n-1]==s2[m-1])
+        {
+            return t[n][m]= 1+LCS(s1,s2,n-1,m-1,t);
+        }
+        
+        else{
+            return t[n][m]= max(LCS(s1,s2,n-1,m,t), LCS(s1,s2,n,m-1,t));
+        }
+        
+        
+    }
+        
+     
+int main()
+{
+   
+ 
+    
+        int n, m; cin >> n >> m;
+        string s1, s2;
+        cin >> s1 >> s2;
+        
+  vector<vector<int>> t (n+1,vector<int> (m+1,-1));
+        
+      int ans =  LCS(s1,s2,n,m,t);
+      cout<<ans;
+
+     return 0; 
+}
