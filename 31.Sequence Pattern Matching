@@ -1,0 +1,36 @@
+31.Sequence Pattern Matching
+Video Link : https://youtu.be/QVntmksK2es
+Leetcode Question Link : https://leetcode.com/problems/is-subsequence/
+
+Approach 1: Using two pointer only. 
+Approach : Find length of LCS & if length = min(string 1's length , string 2's length) ...then return true else false ; 
+
+                  ------->>>>>>>>>>>------------>>>>>>>>>>>>________CODE________<<<<<<<<<<<<------------<<<<<<<<<<<<<<<<<<<<<<<<<<<
+                  
+// Approach 1 : --------->>>>>>>>>             
+                  
+class Solution {
+public:
+    bool isSubsequence(string s, string t) {
+        
+     int n=s.size(), m= t.size();
+        
+        int i=0,j=0;
+        
+        while(i<n && j<m)
+        {
+            if(s[i]==t[j]){
+                i++;
+            }
+            j++;
+        }
+        
+        if(i==n){
+            return true;
+        }
+        else{
+            return false; 
+        }
+        
+    }
+};                  
