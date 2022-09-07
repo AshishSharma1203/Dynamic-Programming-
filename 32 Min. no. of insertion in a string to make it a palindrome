@@ -1,0 +1,40 @@
+32 . Minimum number of insertion in a string to make it a palindrome
+Video Link : https://youtu.be/AEcRW4ylm_c
+GFG practice link : Form a palindrome
+
+// similiar to min no of deletion to make  a string palindrome 
+Approach : Find longest palindromic subsequence (LPS)  and then required insertion = length of string - (LPS) 
+
+                  ------->>>>>>>>>>>------------>>>>>>>>>>>>________CODE________<<<<<<<<<<<<------------<<<<<<<<<<<<<<<<<<<<<<<<<<<
+                  
+ class Solution{
+  public:
+    int countMin(string s){
+    //complete the function here
+    
+    string a = s;
+        reverse(a.begin(),a.end());
+        int n = s.size();
+        
+        // Apply concept of  Longest palindromic subsequence  (LPS) 
+        
+        vector<vector<int>> dp(n+1, vector<int> (n+1,0));
+        
+        // find the length  LPS 
+        
+        for(int i = 1; i <= n; i++) {
+            for(int j = 1; j <= n; j++) {
+                if(s[i-1] == a[j-1])
+                    dp[i][j] = dp[i-1][j-1] + 1;
+                else 
+                    dp[i][j] = max(dp[i][j-1],dp[i-1][j]);
+            }
+        }
+        
+        
+        return n - dp[n][n];
+    
+    
+    
+    }
+};                 
