@@ -1,0 +1,63 @@
+36. Palindrome Partitioning Recursive
+Video Link : https://youtu.be/szKVpQtBHh8
+GFG practice Link : https://practice.geeksforgeeks.org/problems/palindromic-patitioning4845/1
+
+Code : 
+                  ------->>>>>>>>>>>------------>>>>>>>>>>>>________CODE________<<<<<<<<<<<<------------<<<<<<<<<<<<<<<<<<<<<<<<<<<
+                  
+                  
+class Solution{
+public:
+
+//function to check palindrome string 
+bool isPalindrome(string s, int i,int j)
+{
+    
+    while(i<j){
+        if(s[i]!=s[j]){
+            return false; 
+        }
+        i++;j--;
+    }
+    
+    return true; 
+    
+}
+
+// Apply concept of matrix chain multiplication 
+int solve (int i ,int j ,string s)
+{
+    
+    if(i>=j){
+        return 0;
+    }
+    
+    if(isPalindrome(s,i,j)==true){
+        return 0;
+    }
+    
+    int ans=INT_MAX; 
+    
+    for(int k=i;k<=j-1;k++)
+    
+    {
+        int temp= 1+ solve(i,k,s )+ solve(k+1,j,s) ;
+        ans=min(ans,temp);
+    }
+   
+    return ans; 
+    
+}
+
+    int palindromicPartition(string str)
+    {
+        // code here
+        int i=0,n=str.length(), j=n-1;
+        
+        int ans= solve(i,j,str);
+        
+        return ans; 
+        
+    }
+};                  
+                  
