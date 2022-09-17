@@ -1,0 +1,145 @@
+40). Evaluate Expression To True Boolean Parenthesization Memoized
+Video Link : https://youtu.be/bzXM1Zond9U
+GFG Practice Link : https://practice.geeksforgeeks.org/problems/boolean-parenthesization5610/1
+
+                  ------->>>>>>>>>>>------------>>>>>>>>>>>>________CODE________<<<<<<<<<<<<------------<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+// User function Template for C++
+
+
+
+class Solution{
+public:
+
+  unordered_map<string,int> m; 
+  
+
+int solve(int i,int j,string s,bool isTrue)
+{
+ 
+   // base conditions 
+    if(i>j)
+    {
+        return 0; 
+    }
+    
+    if(i==j)
+    {
+        
+        if(isTrue==true)  // if we needed true output 
+        {
+            
+            if(s[i]=='T')   // if the ith character is 'T' 
+            {
+               
+                return 1; 
+                
+            //   can use true or false also , in C++ true=1 & false = 0   
+            }
+            
+            else   
+            // i.e isTrue=False , we needed false as output 
+            {
+                
+                return 0; 
+            }
+        }
+        
+        else
+        {
+           return s[i]=='F' ? 1: 0; 
+        }
+    }
+    
+   //  to precheck the value in our in our map 
+    
+   string temp="";
+   temp=to_string(i);
+   temp+=" ";
+   temp+= to_string(j);
+   temp+=" ";
+   temp+= to_string(isTrue); 
+   
+   if(m.find(temp)!=m.end())
+   {
+       return m[temp]; 
+   }
+    
+ 
+    int ans=0; 
+    
+    
+    for(int k=i+1;k<=j-1;k=k+2)
+    {
+        
+        int leftTrue=solve(i,k-1,s,true);
+        int leftFalse=solve(i,k-1,s,false);
+        int rightTrue=solve(k+1,j,s,true);
+        int rightFalse=solve(k+1,j,s,false);
+        
+        
+        if(s[k]=='&')
+        {
+            
+            if(isTrue==true)
+            {
+                
+                ans+=leftTrue*rightTrue;
+            }
+            else
+            {
+                ans+=leftTrue*rightFalse +leftFalse*rightTrue+ leftFalse*rightFalse; 
+            }
+            
+        }
+        
+        
+        if(s[k]=='|')
+        {
+            
+            if(isTrue==true)
+            {
+                ans+=leftTrue*rightTrue + leftFalse * rightTrue + leftTrue* rightFalse; 
+            }
+            
+            else {
+                ans+=leftFalse * rightFalse; 
+            }
+            
+        }
+        
+        
+        if(s[k]=='^')
+        {
+            
+            if(isTrue==true)
+            {
+                ans+=leftTrue*rightFalse + leftFalse* rightTrue; 
+            }
+            
+            else
+            {
+                ans+=leftTrue* rightTrue + leftFalse*rightFalse; 
+            }
+            
+        }
+        
+        
+    }
+    
+    return m[temp]=ans%1003; 
+    
+    
+}
+
+    int countWays(int n, string s){
+    
+      
+        int i=0,j=n-1;
+    
+        int ans= solve(i,j,s,true);
+        
+        return ans %1003; 
+        
+    }
+};
