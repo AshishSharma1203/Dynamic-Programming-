@@ -1,0 +1,134 @@
+39 ). Evaluate Expression to True Boolean Parenthesization Recursive
+Video Link : https://youtu.be/pGVguAcWX4g
+GFG Practice Link : https://practice.geeksforgeeks.org/problems/boolean-parenthesization5610/1
+
+//Recursive solution 
+
+                  ------->>>>>>>>>>>------------>>>>>>>>>>>>________CODE________<<<<<<<<<<<<------------<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+// User function Template for C++
+
+class Solution{
+public:
+
+int solve(int i,int j,int n,string s,bool isTrue)
+{
+    
+    if(i>=j)
+    {
+        
+        if(isTrue==true)  // if we needed true output 
+        {
+            
+            if(s[i]=='T')   // if the ith character is 'T' 
+            {
+               
+                return 1; 
+                
+            //   can use true or false also , in C++ true=1 & false = 0   
+            }
+            
+            else   
+            // i.e isTrue=False , we needed false as output 
+            {
+                
+                return 0; 
+            }
+        }
+        
+        else
+        {
+            if(s[i]=='F')
+            {
+                // return true; 
+                return 1; 
+            }
+            else
+            {
+                // return false ; 
+                return 0; 
+            }
+        }
+    }
+    
+    
+   
+    
+    int ans=0; 
+    
+    
+    for(int k=i+1;k<=j-1;k=k+2)
+    {
+        
+        int leftTrue=solve(i,k-1,n,s,true);
+        int leftFalse=solve(i,k-1,n,s,false);
+        int rightTrue=solve(k+1,j,n,s,true);
+        int rightFalse=solve(k+1,j,n,s,false);
+        
+        
+        if(s[k]=='&')
+        {
+            
+            if(isTrue==true)
+            {
+                
+                ans+=leftTrue*rightTrue;
+            }
+            else
+            {
+                ans+=leftTrue*rightFalse +leftFalse*rightTrue+ leftFalse*rightFalse; 
+            }
+            
+        }
+        
+        
+        if(s[k]=='|')
+        {
+            
+            if(isTrue==true)
+            {
+                ans+=leftTrue*rightTrue + leftFalse * rightTrue + leftTrue* rightFalse; 
+            }
+            
+            else {
+                ans+=leftFalse * rightFalse; 
+            }
+            
+        }
+        
+        
+        if(s[k]=='^')
+        {
+            
+            if(isTrue==true)
+            {
+                ans+=leftTrue*rightFalse + leftFalse* rightTrue; 
+            }
+            
+            else
+            {
+                ans+=leftTrue* rightTrue + leftFalse*rightFalse; 
+            }
+            
+        }
+        
+        
+    }
+    
+    return ans; 
+    
+    
+}
+
+    int countWays(int n, string s){
+        // code here
+        
+        int i=0,j=n-1;
+    
+        int ans= solve(i,j,n,s,true);
+        
+        return ans; 
+        
+    }
+};
