@@ -1,4 +1,4 @@
-GFG problem Link : https://practice.geeksforgeeks.org/problems/subset-sum-problem2014/1
+// GFG problem Link : https://practice.geeksforgeeks.org/problems/subset-sum-problem2014/1
 
 
 // { Driver Code Starts
