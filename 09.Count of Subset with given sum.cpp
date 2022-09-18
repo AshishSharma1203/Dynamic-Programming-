@@ -1,8 +1,8 @@
-GFG Problem Link : https://practice.geeksforgeeks.org/problems/perfect-sum-problem5633/1
+//GFG Problem Link : https://practice.geeksforgeeks.org/problems/perfect-sum-problem5633/1
 
-Error: Code not accepted 
+// Error: Code not accepted 
 
-Progress --> pending  ( not accepted ) .....->> 
+// Progress --> pending  ( not accepted ) .....->> 
 
 // { Driver Code Starts
 #include <bits/stdc++.h>
