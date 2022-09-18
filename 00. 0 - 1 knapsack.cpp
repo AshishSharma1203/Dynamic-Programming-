@@ -1,6 +1,6 @@
-GFG Problem link : https://practice.geeksforgeeks.org/problems/0-1-knapsack-problem0945/1
+//GFG Problem link : https://practice.geeksforgeeks.org/problems/0-1-knapsack-problem0945/1
 
-* By top down approach 
+//* By top down approach 
 
 // { Driver Code Starts
 #include<bits/stdc++.h>
