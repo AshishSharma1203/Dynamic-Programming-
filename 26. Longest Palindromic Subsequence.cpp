@@ -1,3 +1,5 @@
+/*
+
 26 .Longest Palindromic Subsequence
 Video Link : https://youtu.be/wuOOOATz_IA
 GFG problem link : https://practice.geeksforgeeks.org/problems/longest-palindromic-subsequence-1612327878/1
@@ -9,7 +11,7 @@ ii). Reverse that string and
 iii). then find the length of  longest common subsequence 
 
 ----------------------xxxxxxxxxxxxx---------------xxxxxxxxxxxxx_________CODE___________xxxxxxxxxxxxxxx---------------------xxxxxxxxxxxxxxx----------
-
+*/
 //{ Driver Code Starts
 //Initial template for C++
 
